@@ -16,6 +16,9 @@ Both versions were synthesized, implemented, timing-analyzed, power-evaluated, a
 ---
 ## 🔁 FSM State Diagram
 
+<img width="735" height="590" alt="state_diagram" src="https://github.com/user-attachments/assets/704e07c8-39f7-4eb2-a5d4-7451acdbeab8" />
+
+
 The elevator controller is implemented as a 4-state Moore finite state machine.
 
 ### States
