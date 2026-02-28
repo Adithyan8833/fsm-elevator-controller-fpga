@@ -16,7 +16,7 @@ Both versions were synthesized, implemented, timing-analyzed, power-evaluated, a
 ---
 ## 🔁 FSM State Diagram
 
-<img width="735" height="590" alt="state_diagram" src="https://github.com/user-attachments/assets/704e07c8-39f7-4eb2-a5d4-7451acdbeab8" />
+![FSM State Diagram](docs/state_diagram.png)
 
 
 The elevator controller is implemented as a 4-state Moore finite state machine.
@@ -79,6 +79,13 @@ Control and datapath logic are clearly separated.
 - Minor reduction observed in clock dynamic power
 
 ---
+## Post-Synthesis View
+
+The following snapshot shows the synthesized RTL hierarchy after implementation in Vivado.
+
+![Synthesized Block View](docs/synthesized_block_view.png)
+
+---
 
 ## 🧪 Verification
 
@@ -95,22 +102,29 @@ Verification covered:
 Both versions share identical top-level interfaces.
 
 ---
+## 📊 Simulation Results
+
+The following waveform shows complete functional verification of the elevator controller, including reset behavior, upward movement, downward movement, floor updates, and door operation.
+
+![Full Simulation Waveform](docs/Simulation_waveform.png)
+
+---
 
 ## ⏱️ Timing Analysis
 
 Clock Constraint: 100 MHz (10 ns period)
 
 ### Baseline Version
-- Worst Negative Slack (WNS): <insert value>
+- Worst Negative Slack (WNS): 7.133 ns
 - Total Negative Slack (TNS): 0
-- Worst Hold Slack (WHS): <insert value>
+- Worst Hold Slack (WHS): 0.225 ns
 
 ![Baseline Timing](reports/timing_baseline.png)
 
 ### Clock-Enable Version
-- Worst Negative Slack (WNS): <insert value>
-- Total Negative Slack (TNS): 0
-- Worst Hold Slack (WHS): <insert value>
+- Worst Negative Slack (WNS): 6.302 ns
+- Total Negative Slack (TNS): 0.000 ns
+- Worst Hold Slack (WHS): 0.314 ns
 
 ![Clock Enable Timing](reports/timing_clock_enable.png)
 
@@ -121,18 +135,30 @@ All timing constraints met.
 ## ⚡ Power Analysis
 
 ### Baseline Version
-- Total Power: <insert value>
-- Clock Dynamic: <insert value>
+- Total On-Chip Power: 0.107 W
+- Dynamic Power: 0.001 W
+- Clock Contribution: 67% of dynamic power
+- Device Static: 0.106 W
 
 ![Baseline Power](reports/power_baseline.png)
 
 ### Clock-Enable Version
-- Total Power: <insert value>
-- Clock Dynamic: <insert value>
+- Total On-Chip Power: 0.104 W
+- Dynamic Power: 0.001 W
+- Clock Contribution: 62% of dynamic power
+- Device Static: 0.103 W
 
 ![Clock Enable Power](reports/power_clock_enable.png)
 
 Note: Total power reduction is minimal due to FPGA static power dominance.
+## Power Comparison
+
+| Version | Total Power | Clock Contribution | WNS |
+|----------|------------|-------------------|------|
+| Baseline | 0.107 W | 67% | 7.133 ns |
+| Clock-Enable | 0.104 W | 62% | 6.302 ns |
+
+Clock-enable optimization reduced clock dynamic switching while maintaining timing closure.
 
 ---
 
@@ -148,4 +174,46 @@ Target Board: ZedBoard (Zynq-7000, XC7Z020)
 ---
 
 ## 📂 Repository Structure
+fsm-elevator-controller-fpga/
+
+├── rtl/ → Source RTL modules
+
+├── tb/ → Testbench
+
+├── constraints/ → XDC file
+
+├── reports/ → Timing & Power reports
+
+├── docs/ → Diagrams & Waveforms
+
+└── README.md
+---
+### Quick Access
+- [RTL - Baseline](rtl/baseline/)
+- [RTL - Clock Enable](rtl/clock_enable/)
+- [Testbench](tb/)
+- [Reports](reports/)
+- [Documentation](docs/)
+---
+
+## 🎯 Key Engineering Takeaways
+
+- Practical implementation of a Moore FSM in FPGA
+- Clean separation of control and datapath logic
+- Understanding of setup and hold timing constraints
+- Interpretation of WNS, TNS, and slack margins
+- Analysis of FPGA static vs dynamic power behavior
+- Clock-enable optimization and its impact on switching activity
+- Modular RTL design and verification methodology
+
+---
+
+## 🚀 Future Improvements
+
+- Multi-floor request queue implementation
+- Priority scheduling logic
+- ASIC-style clock gating exploration
+- SAIF-based accurate power estimation
+- Migration to ASIC flow for comparison study
+---
 
