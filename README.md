@@ -171,6 +171,26 @@ Target Board: ZedBoard (Zynq-7000, XC7Z020)
 - LED indicators for motor and door status
 - Successful bitstream generation and hardware validation
 
+  ## 📌 Pin Configuration Table
+
+| Component         | Pin (XDC) | Signal Name       | Description                                      |
+|------------------|----------|-------------------|--------------------------------------------------|
+| Switch SW0       | F22      | req_floor[0]      | Floor Request Input (Bit 0) — ON in photo       |
+| Switch SW1       | G22      | req_floor[1]      | Floor Request Input (Bit 1) — OFF in photo      |
+| LED LD0          | T22      | motor_up          | Status: Motor Moving Up                         |
+| LED LD1          | T21      | motor_down        | Status: Motor Moving Down                       |
+| LED LD2          | U22      | door_open         | Status: Elevator Door Open                      |
+| LED LD6          | U14      | curr_floor[0]     | Current Floor Binary Display (LSB)              |
+| LED LD7          | U19      | curr_floor[1]     | Current Floor Binary Display (MSB)              |
+| BTNC (Center)    | P16      | reset             | System Hardware Reset                           |
+| Oscillator       | Y9       | clk               | 100MHz Onboard System Clock                     |
+
+
+
+  ![20260222_171055](https://github.com/user-attachments/assets/2434d57d-8605-4294-b87c-6455fd84d0b0)
+  
+
+
 ---
 
 ## 📂 Repository Structure
